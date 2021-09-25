@@ -79,8 +79,8 @@
         @foreach($roles as $rol)
 
             <div class="custom-control custom-checkbox">
-                
-                <input type="checkbox" class="custom-control-input" name="roles[]" id="same-address{{ $rol->id }}" value="{{ $rol->id }}">
+
+                <input type="checkbox" class="custom-control-input" name="roles[]" id="same-address{{ $rol->id }}" value="{{ $rol->id }}" {{ collect( old('roles', (count($employee->roles) != 0) ? $employee->roles->first()->employees->pluck('id') : '' ) )->contains($rol->id) ? 'checked' : '' }}  >
                 <label class="custom-control-label" for="same-address{{ $rol->id }}">{{ $rol->nombre }}</label>
             </div>
 

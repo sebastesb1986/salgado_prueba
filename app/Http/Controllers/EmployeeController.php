@@ -86,9 +86,11 @@ class EmployeeController extends Controller
 
         ];
 
-        $employeeUp = Empleado::update($data);
+        $employeeUp = $employee->update($data);
 
         $employee->roles()->sync($request->roles);
+
+        return redirect()->route('lista');
     }
 
     public function delete(Request $request, $id)
