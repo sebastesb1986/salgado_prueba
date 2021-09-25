@@ -20,4 +20,4 @@ Route::get('crear', [EmployeeController::class, 'create'])->name('crear');
 Route::post('crear', [EmployeeController::class, 'store'])->name('empleado.store');
 Route::get('modificar/{id}', [EmployeeController::class, 'modificar'])->name('modificar');
 Route::put('update/{id}', [EmployeeController::class, 'update'])->name('actualizar');
-Route::get('delete/{id}', [EmployeeController::class, 'delete'])->name('eliminar');
+Route::delete('delete/{id}', [EmployeeController::class, 'delete'])->name('eliminar');

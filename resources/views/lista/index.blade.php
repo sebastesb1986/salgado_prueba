@@ -37,7 +37,11 @@
             <td>     <a href="{{ route('modificar', $employee->id) }}" class="btn" tabindex="-1" role="button" aria-disabled="true">
                 <i class="fa fa-edit"></i> 
             </a></td>
-            <td><button type="button" class="btn" value="$employee->id"><i class="fa fa-trash" onClick="Delete();"></i></button></td>
+            <td>
+                <button type="button" class="btn">
+                    <i class="fa fa-trash" onClick="Delete({{ $employee->id }});"></i>
+                </button>
+            </td>
         </tr>
     @endforeach
   </tbody>
@@ -52,12 +56,12 @@
 
 @push('scripts')
 
-<script>
+<script type="text/javascript">
 
     function Delete(btn)
     {
-          let route = "delete/"+btn.value;
-          let note = confirm('¿Esta seguro que desea eliminar este empleado?');
+          let route = "delete/"+btn;
+          let note = confirm("¿Estas Seguro de elimina este empleado?");
           if(note){
             $.ajax({ 
               url: route, 

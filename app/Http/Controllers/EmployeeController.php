@@ -54,7 +54,7 @@ class EmployeeController extends Controller
     public function delete(Request $request, $id)
     {
         $employee = Empleado::findOrFail($id);
-        dd($employee);
+        $employee->delete();
 
     }
 
