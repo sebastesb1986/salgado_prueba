@@ -93,11 +93,3 @@
       </form>
 
 @stop
-
-@push('styles')
-
-@endpush
-
-@push('scripts')
-
-@endpush
