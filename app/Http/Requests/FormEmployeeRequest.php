@@ -28,6 +28,21 @@ class FormEmployeeRequest extends FormRequest
         ];
     }
 
+    public function messages()
+    {
+        return [
+            'nombre.required' => 'El campo nombre no puede ir vacio.',
+            'email.required' => 'El campo email no puede ir vacio.',
+            'customRadio.required' => 'El campo sexo no puede ir vacio.',
+            'descripcion.required' => 'El campo descripción no puede ir vacio.',
+            'area.required' => 'Seleccione al menos un area.',
+            'roles.required' => 'Seleccione al menos un rol.',
+
+            'email.email' => 'El campo email no tiene un formato valido.',
+            'email.unique' => 'Este correo electrónico ya se encuentra registrado.',
+        ];
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -41,7 +56,7 @@ class FormEmployeeRequest extends FormRequest
         return [
 
             'nombre' => 'required',
-            'email' => 'required|unique:empleado,email, ' .$id,
+            'email' => 'required|email|unique:empleado,email, ' .$id,
             'customRadio' => 'required',
             'area' => 'required', 
             'descripcion' => 'required',
