@@ -36,11 +36,11 @@
         <div class="mb-3">
           <label for="username">Sexo(*)</label>
             <div class="custom-control custom-radio">
-                <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" value="{{ old('customRadio', $employee->sexo) }}" {{ ($employee->sexo === 'M' ? 'checked' : '') }}>
+                <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" value="{{ old('customRadio','M') }}" {{ ($employee->sexo == 'M' ? 'checked' : '') }}>
                 <label class="custom-control-label" for="customRadio1">Masculino</label>
             </div>
             <div class="custom-control custom-radio">
-                <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input" value="{{ old('customRadio', $employee->sexo) }}" {{ ($employee->sexo === 'F' ? 'checked' : '') }}>
+                <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input" value="{{ old('customRadio', 'F') }}" {{ ($employee->sexo == 'F' ? 'checked' : '') }}>
                 <label class="custom-control-label" for="customRadio2">Femenino</label>
             </div>
             
@@ -75,12 +75,12 @@
         </div>
 
         <label for="">Roles(*)</label>
-      
+    
         @foreach($roles as $rol)
 
             <div class="custom-control custom-checkbox">
 
-                <input type="checkbox" class="custom-control-input" name="roles[]" id="same-address{{ $rol->id }}" value="{{ $rol->id }}" {{ collect( old('roles', (count($employee->roles) != 0) ? $employee->roles->first()->employees->pluck('id') : '' ) )->contains($rol->id) ? 'checked' : '' }}  >
+                <input type="checkbox" class="custom-control-input" name="roles[]" id="same-address{{ $rol->id }}" value="{{ $rol->id }}" {{ collect( old('roles', (count($employee->roles) != 0) ? $employee->roles->pluck('id') : '' ) )->contains($rol->id) ? 'checked' : '' }}  >
                 <label class="custom-control-label" for="same-address{{ $rol->id }}">{{ $rol->nombre }}</label>
             </div>
 
