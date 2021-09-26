@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\FormEmployeeRequest;
 use App\Models\Area;
 use App\Models\Empleado;
 use App\Models\Rol;
@@ -49,7 +50,7 @@ class EmployeeController extends Controller
 
     }
 
-    public function store(Request $request)
+    public function store(FormEmployeeRequest $request)
     {
         $data = [
 
@@ -70,7 +71,7 @@ class EmployeeController extends Controller
         return redirect()->route('lista');
     }
 
-    public function update(Request $request, $id)
+    public function update(FormEmployeeRequest $request, $id)
     {
         $employee = Empleado::findOrFail($id);
 

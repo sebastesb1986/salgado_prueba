@@ -11,7 +11,7 @@
 </div>
 
 <div class="alert alert-primary" role="alert">
-  Los campos con asteriscos(*) son obligatorios.
+{{ $errors}}
 </div>
 
 <form class="needs-validation" method="POST" action="{{ route('empleado.store') }}">
@@ -19,14 +19,14 @@
         <div class="row">
           <div class="col-md-6 mb-3">
             <label for="firstName">Nombre completo(*)</label>
-            <input type="text" class="form-control" id="firstName" placeholder="Nombre completo" name="nombre" >
+            <input type="text" class="form-control" id="firstName" placeholder="Nombre completo" name="nombre" value="{{ old('nombre') }}">
             <div class="invalid-feedback">
               Valid first name is .
             </div>
           </div>
           <div class="col-md-6 mb-3">
             <label for="lastName">Correo electrónico(*)</label>
-            <input type="text" class="form-control" id="lastName" placeholder="Correo electrónico" name="email" >
+            <input type="text" class="form-control" id="lastName" placeholder="Correo electrónico" name="email" value="{{ old('email') }}">
             <div class="invalid-feedback">
               Valid last name is .
             </div>
@@ -36,11 +36,11 @@
         <div class="mb-3">
           <label for="username">Sexo(*)</label>
             <div class="custom-control custom-radio">
-                <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" value="M">
+                <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input" value="M" {{ old('customRadio') == 'M' ? 'checked' : '' }}>
                 <label class="custom-control-label" for="customRadio1">Masculino</label>
             </div>
             <div class="custom-control custom-radio">
-                <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input" value="F">
+                <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input" value="F" {{ old('customRadio') == 'F' ? 'checked' : '' }}>
                 <label class="custom-control-label" for="customRadio2">Femenino</label>
             </div>
             
@@ -50,7 +50,7 @@
           <label for="email">Area(*)</label>
             <select class="custom-select" name="area">
                 @foreach($areas as $area)
-                    <option value="{{ $area->id }}">{{ $area->nombre }}</option>
+                    <option value="{{ $area->id }}" {{ old('area') == $area->id ? 'selected' : '' }}  >{{ $area->nombre }}</option>
                 @endforeach
             </select>
           <div class="invalid-feedback">
@@ -60,7 +60,7 @@
 
         <div class="mb-3">
           <label for="address">Descripción(*)</label>
-          <textarea class="form-control" id="validationTextarea" placeholder="Descripción de la experiencia del empleado" name="descripcion"></textarea>
+          <textarea class="form-control" id="validationTextarea" placeholder="Descripción de la experiencia del empleado" name="descripcion">{{ old('descripcion') }}</textarea>
           <div class="invalid-feedback">
             Please enter your shipping address.
           </div>
@@ -69,7 +69,7 @@
         <div class="mb-3">
             <div class="custom-control custom-checkbox">
                 
-                <input type="checkbox" class="custom-control-input" id="same-addressi" name="boletin" >
+                <input type="checkbox" class="custom-control-input" id="same-addressi" name="boletin" {{ old('boletin') == true ? 'checked' : '' }}>
                 <label class="custom-control-label" for="same-addressi">Deseo recibir boletin informativo</label>
             </div>
         </div>
@@ -80,7 +80,7 @@
 
             <div class="custom-control custom-checkbox">
                 
-                <input type="checkbox" class="custom-control-input" name="roles[]" id="same-address{{ $rol->id }}" value="{{ $rol->id }}">
+                <input type="checkbox" class="custom-control-input" name="roles[]" id="same-address{{ $rol->id }}" value="{{ $rol->id }}" {{ (is_array(old('roles')) && in_array( $rol->id, old('roles'))) ? 'checked' : '' }}>
                 <label class="custom-control-label" for="same-address{{ $rol->id }}">{{ $rol->nombre }}</label>
             </div>
 

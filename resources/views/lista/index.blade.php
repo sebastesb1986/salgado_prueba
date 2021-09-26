@@ -14,7 +14,7 @@
         </a>
     </div>
 
-<table class="table table-striped">
+<table id="table-to-refresh"class="table table-striped">
   <thead>
     <tr>
       <th scope="col"><i class="fa fa-user"></i> Nombre</th>
@@ -58,11 +58,23 @@
 
 <script type="text/javascript">
 
+    function Cargar()
+    {
+
+      $('#table-to-refresh') .load(window.location.href + " #table-to-refresh" );
+
+    }
+
     function Delete(btn)
     {
+
           let route = "delete/"+btn;
           let note = confirm("¿Estas Seguro de elimina este empleado?");
+          
           if(note){
+
+            
+
             $.ajax({ 
               url: route, 
               type: 'DELETE', 
@@ -70,7 +82,7 @@
               headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')} 
             })
             .then(response => {
-                // Cargar();
+                console.log(response);
             })
             .catch(error => {
                 // handle error
