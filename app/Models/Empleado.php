@@ -15,6 +15,21 @@ class Empleado extends Model
     ];
 
     public $timestamps = false;
+
+    public static function listArea()
+    {
+        $areas = Area::select('id', 'nombre')->get();
+
+        return $areas;
+    }
+
+    public static function listRoles()
+    {
+      
+        $roles = Rol::select('id', 'nombre')->get();
+
+        return $roles;
+    }
     
     public function areas(){
 

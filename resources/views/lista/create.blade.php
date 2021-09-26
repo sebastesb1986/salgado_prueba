@@ -1,5 +1,7 @@
 @extends('layout.app')
 
+@inject('metrics', 'App\Models\Empleado')
+
 @section('title', 'Crear empleado')
 
 @section('content')
@@ -50,7 +52,7 @@
         <div class="mb-3">
           <label for="email">Area(*)</label>
             <select class="custom-select @error('area') is-invalid @enderror" name="area">
-                @foreach($areas as $area)
+                @foreach($metrics->listArea() as $area)
                     <option value="{{ $area->id }}" {{ old('area') == $area->id ? 'selected' : '' }}  >{{ $area->nombre }}</option>
                 @endforeach
             </select>
@@ -83,7 +85,7 @@
 
         <label for="">Roles(*)</label>@error('roles') <label class="font-weight-bold text-danger">{{ $message }}</label>@enderror
       
-        @foreach($roles as $rol)
+        @foreach($metrics->listRoles() as $rol)
 
             <div class="custom-control custom-checkbox">
                 

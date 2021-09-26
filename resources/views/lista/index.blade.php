@@ -8,6 +8,15 @@
         <h2>Lista de empleados</h2>
     </div>
 
+    @if ($message = Session::get('success'))
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {!! $message !!}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+    @endif
+
     <div class="py-3 text-right">
         <a href="{{ route('crear') }}" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="true">
             <i class="fa fa-user-plus"></i> Crear

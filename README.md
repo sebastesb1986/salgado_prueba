@@ -7,11 +7,11 @@
 7. La primera vista sera la lista de empleados, de no existir alguno, puede crearse alguno
 8. La aplicación actualmente lee usuarios, crea, modifica y elimina
 9. Modificar empleado esta completamente terminado.
-10. Validaciones ya completadas. FALTA REFRESCAR TABLA DE EMPLEADOS AL ELIMINAR UNO y AGREGAR ALERTAS QUE INDICAN UNA ACCION.
+10. Validaciones ya completadas. FALTA REFRESCAR TABLA DE EMPLEADOS AL ELIMINAR UNO DE ELLOS.
 
 Cualquier inquietud escribirme al correo salgadosb1986@gmail.com y en el menor tiempo
 posible contestare resolviendo dudas y demas.
 
 11. La aplicación seguira en constante actualización para conseguir la funcionalidad completa(actualmente)
-esta a un 95% realizada. segun el email de la prueba es posible subir commits posterior a la entrega paracumplir
+esta a un 99% realizada. segun el email de la prueba es posible subir commits posterior a la entrega paracumplir
 con la uncionalidad pedida.

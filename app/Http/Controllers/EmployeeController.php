@@ -25,20 +25,13 @@ class EmployeeController extends Controller
 
     public function create()
     {
-        $areas = Area::select('id', 'nombre')->get();
-
-        $roles = Rol::select('id', 'nombre')->get();
-
-        return view('lista.create', compact('areas', 'roles'));
+        
+        return view('lista.create');
 
     }
 
     public function modificar($id)
     {
-
-        $areas = Area::select('id', 'nombre')->get();
-
-        $roles = Rol::select('id', 'nombre')->get();
 
         $employee = Empleado::with(['areas' => function($td){
                                 $td->select('id', 'nombre');
@@ -46,7 +39,7 @@ class EmployeeController extends Controller
                             ->select('id', 'nombre', 'email', 'sexo', 'boletin', 'descripcion', 'area_id')
                             ->findOrFail($id);
        
-        return view('lista.edit', compact('employee', 'areas', 'roles'));
+        return view('lista.edit', compact('employee'));
 
     }
 
@@ -68,7 +61,7 @@ class EmployeeController extends Controller
 
         $employee->roles()->sync($request->roles);
 
-        return redirect()->route('lista');
+        return redirect()->route('lista')->with('success', 'Empleado <strong> ' .$request->nombre. ' </strong> Registrado exitosamente!');
     }
 
     public function update(FormEmployeeRequest $request, $id)
@@ -84,14 +77,13 @@ class EmployeeController extends Controller
             'boletin' => ( $request->has('boletin') == true ? '1' : '0'),
             'descripcion' => $request->descripcion,
 
-
         ];
 
         $employeeUp = $employee->update($data);
 
         $employee->roles()->sync($request->roles);
 
-        return redirect()->route('lista');
+        return redirect()->route('lista')->with('success', 'Empleado <strong> ' .$request->nombre. ' </strong> Modificado exitosamente!');
     }
 
     public function delete(Request $request, $id)
