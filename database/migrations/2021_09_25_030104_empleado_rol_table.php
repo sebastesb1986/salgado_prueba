@@ -15,7 +15,7 @@ class EmpleadoRolTable extends Migration
     {
         Schema::create('empleado_rol', function (Blueprint $table) {
 
-             $table->increments('id');
+            // $table->increments('id');
 
             // LLAVE FORANEA 
             $table->integer('empleado_id')->unsigned();

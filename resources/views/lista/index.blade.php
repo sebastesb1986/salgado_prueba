@@ -17,13 +17,20 @@
       </div>
     @endif
 
+    <div class="alert alert-danger alert-dismissible fade" role="alert" id="remove">
+        <p id="name"></p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
     <div class="py-3 text-right">
         <a href="{{ route('crear') }}" class="btn btn-primary" tabindex="-1" role="button" aria-disabled="true">
             <i class="fa fa-user-plus"></i> Crear
         </a>
     </div>
 
-<table id="table-to-refresh"class="table table-striped">
+<table id="table-to-refresh" class="table table-striped">
   <thead>
     <tr>
       <th scope="col"><i class="fa fa-user"></i> Nombre</th>
@@ -35,7 +42,7 @@
       <th scope="col">Eliminar</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody >
     @foreach($employees as $employee)
         <tr>
             <td>{{ $employee->nombre }}</td>
@@ -70,7 +77,7 @@
     function Cargar()
     {
 
-      $('#table-to-refresh') .load(window.location.href + " #table-to-refresh" );
+      $('#table-to-refresh').load(window.location.href + " #table-to-refresh" );
 
     }
 
@@ -81,9 +88,7 @@
           let note = confirm("¿Estas Seguro de elimina este empleado?");
           
           if(note){
-
             
-
             $.ajax({ 
               url: route, 
               type: 'DELETE', 
@@ -91,7 +96,12 @@
               headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')} 
             })
             .then(response => {
-                console.log(response);
+              
+              Cargar();
+
+              $('#name').html(response.success);
+              $('#remove').addClass('show');
+
             })
             .catch(error => {
                 // handle error

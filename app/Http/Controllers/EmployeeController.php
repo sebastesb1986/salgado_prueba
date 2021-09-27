@@ -54,14 +54,13 @@ class EmployeeController extends Controller
             'boletin' => ( $request->has('boletin') == true ? '1' : '0'),
             'descripcion' => $request->descripcion,
 
-
         ];
 
         $employee = Empleado::create($data);
 
         $employee->roles()->sync($request->roles);
 
-        return redirect()->route('lista')->with('success', 'Empleado <strong> ' .$request->nombre. ' </strong> Registrado exitosamente!');
+        return redirect()->route('lista')->with('success', 'El empleado <strong> ' .$request->nombre. ' </strong> Ha sido registrado exitosamente!');
     }
 
     public function update(FormEmployeeRequest $request, $id)
@@ -83,13 +82,18 @@ class EmployeeController extends Controller
 
         $employee->roles()->sync($request->roles);
 
-        return redirect()->route('lista')->with('success', 'Empleado <strong> ' .$request->nombre. ' </strong> Modificado exitosamente!');
+        return redirect()->route('lista')->with('success', 'El empleado <strong> ' .$request->nombre. ' </strong> ha sido modificado exitosamente!');
     }
 
     public function delete(Request $request, $id)
     {
         $employee = Empleado::findOrFail($id);
         $employee->delete();
+
+        if($request->ajax())
+        {
+            return response()->json(['success'=> 'El empleado <strong> ' .$employee->nombre. ' </strong> ha sido eliminado.']);
+        }
 
     }
 

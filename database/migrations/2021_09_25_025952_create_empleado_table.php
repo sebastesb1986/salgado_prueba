@@ -23,7 +23,7 @@ class CreateEmpleadoTable extends Migration
             $table->text('descripcion');
           
             $table->integer('area_id')->unsigned();
-            $table->foreign('area_id')->references('id')->on('areas');
+            $table->foreign('area_id')->references('id')->on('areas')->onDelete('cascade');
 
               //$table->timestamps();
 
