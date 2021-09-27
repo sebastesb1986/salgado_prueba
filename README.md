@@ -13,6 +13,12 @@
 esta a 100%. segun el email de la prueba es posible subir commits posterior a la entrega paracumplir
 con la funcionalidad pedida.
 
+- El controlador donde se realizan las acciones es: App/Http/Controllers/EmployeeController.
+- Los modelos donde se determinan las tablas, operaciones y relaciones: App/Models/Area, App/Models/Empleado, App/Models/Rol.
+- Vistas de la aplicación: resources/views/lista (index, edit, create).
+- Migraciones o estructura de la base de datos(tablas): database/migrations (areas, empleado, roles, empleado_rol)
+- Rutas: routes/web.php.
+
 Cualquier inquietud comunicarse conmigo al correo salgadosb1986@gmail.com y en el menor tiempo
 posible contestare resolviendo dudas y demas.
 
