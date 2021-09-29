@@ -4,20 +4,22 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\FormEmployeeRequest;
-use App\Models\Area;
-use App\Models\Empleado;
-use App\Models\Rol;
+use App\Repositories\EmployeeRepository;
 
 class EmployeeController extends Controller
 {
+    protected $employeeRepository;
+
+    // Llamar Funciones del Repositorio
+    public function __construct(EmployeeRepository $employeeRepository){
+
+        $this->employeeRepository = $employeeRepository;
+
+    }
+
     public function index()
     {
-
-        $employees = Empleado::with(['areas' => function($td){
-                                $td->select('id', 'nombre');
-                            }])
-                            ->select('id', 'nombre', 'email', 'sexo', 'boletin', 'descripcion', 'area_id')
-                            ->get();
+        $employees = $this->employeeRepository->listEmployees()->get();
 
         return view('lista.index', compact('employees'));
 
@@ -33,11 +35,7 @@ class EmployeeController extends Controller
     public function modificar($id)
     {
 
-        $employee = Empleado::with(['areas' => function($td){
-                                $td->select('id', 'nombre');
-                            }])
-                            ->select('id', 'nombre', 'email', 'sexo', 'boletin', 'descripcion', 'area_id')
-                            ->findOrFail($id);
+        $employee = $this->employeeRepository->editEmployee()->findOrFail($id);
        
         return view('lista.edit', compact('employee'));
 
@@ -45,18 +43,17 @@ class EmployeeController extends Controller
 
     public function store(FormEmployeeRequest $request)
     {
-        $data = [
+        
+        $employee = $this->employeeRepository->newEmpleado(
+            
+            $request->nombre,
+            $request->email,
+            $request->customRadio,
+            $request->area,
+            ( $request->has('boletin') == true ? '1' : '0'),
+            $request->descripcion,
 
-            'nombre' => $request->nombre,
-            'email' => $request->email,
-            'sexo' => $request->customRadio,
-            'area_id' => $request->area,
-            'boletin' => ( $request->has('boletin') == true ? '1' : '0'),
-            'descripcion' => $request->descripcion,
-
-        ];
-
-        $employee = Empleado::create($data);
+        );
 
         $employee->roles()->sync($request->roles);
 
@@ -65,7 +62,7 @@ class EmployeeController extends Controller
 
     public function update(FormEmployeeRequest $request, $id)
     {
-        $employee = Empleado::findOrFail($id);
+        $employee = $this->employeeRepository->empleado()->findOrFail($id);
 
         $data = [
 
@@ -87,7 +84,7 @@ class EmployeeController extends Controller
 
     public function delete(Request $request, $id)
     {
-        $employee = Empleado::findOrFail($id);
+        $employee = $this->employeeRepository->empleado()->findOrFail($id);
         $employee->delete();
 
         if($request->ajax())

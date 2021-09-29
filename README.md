@@ -14,6 +14,7 @@ esta a 100%. segun el email de la prueba es posible subir commits posterior a la
 con la funcionalidad pedida.
 
 - El controlador donde se realizan las acciones es: App/Http/Controllers/EmployeeController.
+- En la carpeta App/Repositories esta EmployeeRepository.php en donde se establecen las funciones para llamar al controlador EmployeController.
 - Los modelos donde se determinan las tablas, operaciones y relaciones: App/Models/Area, App/Models/Empleado, App/Models/Rol.
 - Vistas de la aplicación: resources/views/lista (index, edit, create).
 - Migraciones o estructura de la base de datos(tablas): database/migrations (areas, empleado, roles, empleado_rol)
